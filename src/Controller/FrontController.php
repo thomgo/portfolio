@@ -8,13 +8,35 @@ use Symfony\Component\Routing\Annotation\Route;
 class FrontController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="index")
      */
     public function index()
     {
         $title = "coucou les loulous";
         return $this->render('front/index.html.twig', [
-            'title' => $title,
+
+        ]);
+    }
+
+    /**
+     * @Route("/apropos", name="about")
+     */
+    public function about()
+    {
+        $title = "coucou les loulous";
+        return $this->render('front/about.html.twig', [
+
+        ]);
+    }
+
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function contact()
+    {
+        $title = "coucou les loulous";
+        return $this->render('front/contact.html.twig', [
+
         ]);
     }
 }
