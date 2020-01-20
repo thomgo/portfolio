@@ -22,9 +22,9 @@
                 <td>{{ project.title }}</td>
                 <td><a href="{{ project.viewLink }}" target="_blank">{{ project.viewLink }}</a></td>
                 <td><a href="{{ project.codeLink }}" target="_blank">{{ project.codeLink }}</a></td>
-                <td>
+                <td class="d-flex align-items-center">
                     <a href="{{ path('project_edit', {'id': project.id}) }}"><i class="fas fa-edit mx-1"></i></a>
-                    <a href="{{ path('project_delete', {'id': project.id}) }}"><i class="fas fa-trash-alt mx-1 text-danger"></i></a>
+                    {{ include('project/_delete_form.html.twig', {project: project}, with_context = false) }}
                 </td>
             </tr>
         {% else %}
