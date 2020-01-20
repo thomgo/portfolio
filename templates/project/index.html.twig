@@ -3,32 +3,28 @@
 {% block title %}Project index{% endblock %}
 
 {% block body %}
-    <h1>Project index</h1>
-
-    <table class="table">
-        <thead>
+    <h3 class="text-center my-2">Gérer les projets</h3>
+    <a class="btn btn-secondary float-right mb-4" href="{{ path('project_new') }}">Nouveau projet</a>
+    <table class="table table-bordered table-striped">
+        <thead class="text-center thead-dark">
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>ViewLink</th>
-                <th>CodeLink</th>
                 <th>Position</th>
-                <th>actions</th>
+                <th>Titre</th>
+                <th>Site</th>
+                <th>Code</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for project in projects %}
             <tr>
-                <td>{{ project.id }}</td>
+                <td>{{ project.position }} <i class="fas fa-arrow-alt-circle-up"></i> <i class="fas fa-arrow-alt-circle-down"></i></td>
                 <td>{{ project.title }}</td>
-                <td>{{ project.description }}</td>
-                <td>{{ project.viewLink }}</td>
-                <td>{{ project.codeLink }}</td>
-                <td>{{ project.position }}</td>
+                <td><a href="{{ project.viewLink }}" target="_blank">{{ project.viewLink }}</a></td>
+                <td><a href="{{ project.codeLink }}" target="_blank">{{ project.codeLink }}</a></td>
                 <td>
-                    <a href="{{ path('project_show', {'id': project.id}) }}">show</a>
-                    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
+                    <a href="{{ path('project_edit', {'id': project.id}) }}"><i class="fas fa-edit mx-1"></i></a>
+                    <a href="{{ path('project_delete', {'id': project.id}) }}"><i class="fas fa-trash-alt mx-1 text-danger"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -38,6 +34,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('project_new') }}">Create new</a>
 {% endblock %}
