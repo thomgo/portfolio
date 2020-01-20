@@ -4,4 +4,7 @@
 
 {% block body %}
   <h3 class="text-center mt-2">Découvrir mon travail</h3>
+  {% for project in projects %}
+    <p>{{ project.title }}</p>
+  {% endfor %}
 {% endblock %}

@@ -4,17 +4,18 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ProjectRepository;
 
 class FrontController extends AbstractController
 {
     /**
      * @Route("/", name="index")
      */
-    public function index()
+    public function index(ProjectRepository $projectRepo)
     {
-        $title = "coucou les loulous";
+        $projects = $projectRepo->findBy([], ["position" => "ASC"]);
         return $this->render('front/index.html.twig', [
-
+          "projects" => $projects
         ]);
     }
 
