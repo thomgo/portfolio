@@ -12,11 +12,11 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('description')
-            ->add('viewLink')
-            ->add('codeLink')
-            ->add('position')
+            ->add('title', null, ['label'=>'Titre'])
+            ->add('description', null, ['label'=>'Description'])
+            ->add('viewLink', null, ['label'=>'Lien vers le site'])
+            ->add('codeLink', null, ['label'=>'Lien vers le code'])
+            ->add('position', null, ['label'=>'Position'])
         ;
     }
 
