@@ -91,4 +91,15 @@ class ProjectController extends AbstractController
 
         return $this->redirectToRoute('project_index');
     }
+
+    /**
+     * @Route("/{id}", name="project_position", methods={"POST"})
+     */
+    public function change_position(Request $request, Project $project): Response
+    {
+        if ($this->isCsrfTokenValid('position'.$project->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+        }
+        return $this->redirectToRoute('project_index');
+    }
 }
