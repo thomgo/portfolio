@@ -82,7 +82,8 @@ header .container-fluid {
 .card {
   position: relative;
   box-shadow: 7px 7px 20px black;
-
+  height: 30vh;
+  box-shadow: none;
 }
 
 .card:hover {

@@ -4,7 +4,42 @@
 
 {% block body %}
   <h3 class="text-center mt-2">Découvrir mon travail</h3>
-  {% for project in projects %}
-    <p>{{ project.title }}</p>
-  {% endfor %}
+  <div class="row mb-5 justify-content-center">
+    {% for project in projects %}
+      <div class="col-9 col-sm-6 col-md-4 my-auto">
+        <div class="card bg-dark my-3">
+          <div class="card-body d-flex justify-content-center align-items-center">
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal{{project.position}}">
+              {{ project.title }}
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="modal{{project.position}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ project.title }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    {{project.description}}
+                  </div>
+                  <div class="modal-footer">
+                    {% if project.viewLink %}
+                      <a href="{{project.viewLink}}" target="_blank" class="btn btn-secondary">Site <i class="fas fa-desktop"></i></a>
+                    {% endif %}
+                    {% if project.codeLink %}
+                      <a href="{{project.codeLink}}" target="_blank" class="btn btn-secondary">GitHub <i class="fab fa-github-square" aria-hidden="true"></i></a>
+                    {% endif %}
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}
