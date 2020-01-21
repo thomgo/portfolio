@@ -41,7 +41,7 @@ h1 {
   border-bottom: solid 2px #d9534f;
 }
 
-header .container-fluid, footer {
+header .container-fluid {
   display: flex;
   flex-direction: column;
   justify-content: center;
