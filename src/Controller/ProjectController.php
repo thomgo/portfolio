@@ -99,10 +99,7 @@ class ProjectController extends AbstractController
     {
         if ($this->isCsrfTokenValid('position'.$project->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $totalProjects = $projectRepository->createQueryBuilder('p')
-            ->select('count(p.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
+            $totalProjects = $projectRepository->getNumberProjects();
             if ($request->request->get('direction') === "up" && $project->getPosition() > 1) {
               $previousProject = $projectRepository->findOneBy(["position" => $project->getPosition() - 1]);
               $previousProject->setPosition($previousProject->getPosition() + 1);
