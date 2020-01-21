@@ -21,7 +21,7 @@ class ProjectController extends AbstractController
     public function index(ProjectRepository $projectRepository): Response
     {
         return $this->render('project/index.html.twig', [
-            'projects' => $projectRepository->findAll(),
+            'projects' => $projectRepository->findBy([], ["position" => "ASC"]),
         ]);
     }
 
@@ -95,10 +95,21 @@ class ProjectController extends AbstractController
     /**
      * @Route("/{id}", name="project_position", methods={"POST"})
      */
-    public function change_position(Request $request, Project $project): Response
+    public function change_position(Request $request, Project $project, ProjectRepository $projectRepository): Response
     {
         if ($this->isCsrfTokenValid('position'.$project->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            if ($request->request->get('direction') === "up") {
+              $previousProject = $projectRepository->findOneBy(["position" => $project->getPosition() - 1]);
+              $previousProject->setPosition($previousProject->getPosition() + 1);
+              $project->setPosition($project->getPosition() - 1);
+            }
+            elseif ($request->request->get('direction') === "down") {
+              $nextProject = $projectRepository->findOneBy(["position" => $project->getPosition() + 1]);
+              $nextProject->setPosition($nextProject->getPosition() - 1);
+              $project->setPosition($project->getPosition() + 1);
+            }
+            $entityManager->flush();
         }
         return $this->redirectToRoute('project_index');
     }
