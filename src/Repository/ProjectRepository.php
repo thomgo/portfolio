@@ -29,6 +29,16 @@ class ProjectRepository extends ServiceEntityRepository
       ->getSingleScalarResult();
     }
 
+    /**
+     *@return Integer Returns the last position
+     */
+    public function getLastPosition() {
+      return $this->createQueryBuilder('p')
+      ->select('max(p.position)')
+      ->getQuery()
+      ->getSingleScalarResult();
+    }
+
     // /**
     //  * @return Project[] Returns an array of Project objects
     //  */

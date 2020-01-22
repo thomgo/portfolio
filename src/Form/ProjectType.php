@@ -16,7 +16,6 @@ class ProjectType extends AbstractType
             ->add('description', null, ['label'=>'Description'])
             ->add('viewLink', null, ['label'=>'Lien vers le site'])
             ->add('codeLink', null, ['label'=>'Lien vers le code'])
-            ->add('position', null, ['label'=>'Position'])
         ;
     }
 

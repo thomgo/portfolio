@@ -28,13 +28,15 @@ class ProjectController extends AbstractController
     /**
      * @Route("/new", name="project_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ProjectRepository $projectRepository): Response
     {
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $lastPosition = $projectRepository->getLastPosition();
+            $project->setPosition($lastPosition + 1);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
