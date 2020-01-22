@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\File;
 
 /**
  * @Route("/project")
@@ -30,7 +32,7 @@ class ProjectController extends AbstractController
     /**
      * @Route("/new", name="project_new", methods={"GET","POST"})
      */
-    public function new(Request $request, ProjectRepository $projectRepository): Response
+    public function new(Request $request, ProjectRepository $projectRepository, FileUploader $fileUploader): Response
     {
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
@@ -40,20 +42,8 @@ class ProjectController extends AbstractController
             /** @var UploadedFile $imageFile */
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    $imageFile->move(
-                        $this->getParameter('projects_images_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-                $project->setimageFilename($newFilename);
+                $imageFilename = $fileUploader->upload($imageFile);
+                $project->setimageFilename($imageFilename);
               }
             $lastPosition = $projectRepository->getLastPosition();
             $project->setPosition($lastPosition + 1);
@@ -85,6 +75,9 @@ class ProjectController extends AbstractController
      */
     public function edit(Request $request, Project $project): Response
     {
+        // $project->setImageFilename(
+        //   new File($this->getParameter('projects_images_directory').$project->getImageFilename())
+        // );
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 

@@ -116,7 +116,7 @@ class Project
         return $this->imageFilename;
     }
 
-    public function setImageFilename(?string $imageFilename): self
+    public function setImageFilename($imageFilename): self
     {
       $this->imageFilename = $imageFilename;
 
