@@ -43,7 +43,12 @@ class ProjectController extends AbstractController
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
                 $imageFilename = $fileUploader->upload($imageFile);
-                $project->setimageFilename($imageFilename);
+                if ($imageFilename) {
+                  $project->setimageFilename($imageFilename);
+                }
+                else {
+                  $this->addFlash('info', "L'enregistrement de l'image a échoué");
+                }
               }
             $lastPosition = $projectRepository->getLastPosition();
             $project->setPosition($lastPosition + 1);
@@ -85,9 +90,14 @@ class ProjectController extends AbstractController
             /** @var UploadedFile $imageFile */
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
-              $filesystem->remove($this->getParameter('projects_images_directory') . $project->getImageFilename());
               $imageFilename = $fileUploader->upload($imageFile);
-              $project->setimageFilename($imageFilename);
+              if ($imageFilename) {
+                $filesystem->remove($this->getParameter('projects_images_directory') . $project->getImageFilename());
+                $project->setimageFilename($imageFilename);
+              }
+              else {
+                $this->addFlash('info', "La modification de l'image a échoué");
+              }
             }
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('project_index');
