@@ -7,12 +7,12 @@ use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @Route("/project")
@@ -96,9 +96,10 @@ class ProjectController extends AbstractController
     /**
      * @Route("/{id}", name="project_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Project $project): Response
+    public function delete(Request $request, Project $project, Filesystem $filesystem): Response
     {
         if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
+            $filesystem->remove($this->getParameter('projects_images_directory') . $project->getImageFilename());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($project);
             $entityManager->flush();
