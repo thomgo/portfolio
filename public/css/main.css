@@ -81,31 +81,43 @@ header .container-fluid {
 
 .card {
   position: relative;
-  box-shadow: 7px 7px 20px black;
-  height: 30vh;
-  box-shadow: none;
+}
+
+.layer, .card img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+}
+
+.layer {
+  -webkit-transition: width 1s, height 1s; /* Safari prior 6.1 */
+  transition: width 1s, height 1s;
+  z-index: 1;
+  opacity: 0.6;
+  background-color: black;
+}
+
+.card img {
+  z-index: 0;
+  filter: grayscale(1);
+}
+
+.card:hover img {
+  filter: grayscale(0);
+}
+
+.card:hover .layer{
+  height: 0;
+}
+
+.card-body {
+  z-index: 2;
 }
 
 .card:hover {
-  box-shadow: 5px 10px 10px black;
-}
-
-.card-block p {
-  height: 100px;
-  overflow: hidden;
-}
-
-.show-button, .hide-button {
-  background-color: white;
-}
-
-.card-overlay {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 100;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 5px 10px black;
 }
 
 /**
