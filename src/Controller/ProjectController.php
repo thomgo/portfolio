@@ -73,7 +73,7 @@ class ProjectController extends AbstractController
     /**
      * @Route("/{id}/edit", name="project_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Project $project): Response
+    public function edit(Request $request, Project $project, FileUploader $fileUploader, Filesystem $filesystem): Response
     {
         // $project->setImageFilename(
         //   new File($this->getParameter('projects_images_directory').$project->getImageFilename())
@@ -82,8 +82,14 @@ class ProjectController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+              $filesystem->remove($this->getParameter('projects_images_directory') . $project->getImageFilename());
+              $imageFilename = $fileUploader->upload($imageFile);
+              $project->setimageFilename($imageFilename);
+            }
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('project_index');
         }
 
