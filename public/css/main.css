@@ -56,7 +56,7 @@ header .container-fluid {
 
 .jumbotron {
   height: 60vh;
-  background-image: url(../img/dubai_small.jpg);
+  background-image: url(../img/mountains.png);
   background-position: center;
   background-size: cover;
 }
@@ -153,10 +153,6 @@ footer i:hover {
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
- .jumbotron {
-   background-image: url(../img/dubai_medium.jpg);
- }
-
  .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .active .nav-link:hover {
    font-size: 1.1em;
    background-color: white;
@@ -178,11 +174,7 @@ footer i:hover {
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-
-  .jumbotron {
-    background-image: url(../img/dubai.jpg);
-  }
-
+  
   .card-block p {
     height: 140px;
   }
