@@ -3,8 +3,9 @@
 ~~~~~~~General~~~~~~~~
 
 **/
-.hide {
-  display: none;
+
+* {
+  font-family: 'Open Sans', sans-serif;
 }
 
 a {
@@ -21,14 +22,6 @@ p a, nav i {
   font-style: italic;
 }
 
-p, h6, button, a, nav {
-  font-family: 'Open Sans', sans-serif;
-  }
-
-h1, h2 {
-  color: white;
-}
-
 h1, h3, footer p {
   font-family: 'Indie Flower', cursive;
 }
@@ -41,12 +34,6 @@ h1 {
   border-bottom: solid 2px #d9534f;
 }
 
-header .container-fluid {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
 /**
 
@@ -61,17 +48,15 @@ header .container-fluid {
   background-size: cover;
 }
 
-header .container-fluid {
+.jumbotron .container-fluid {
   background-color: rgba(0, 0, 0, 0.5);
   height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-
-/**
-
-~~~~~~~End header~~~~~~~~
-
-**/
 
 /**
 
@@ -83,12 +68,22 @@ header .container-fluid {
   position: relative;
 }
 
+.card:hover {
+  box-shadow: 2px 5px 10px black;
+}
+
+/* Cover each card with an image and a black transparent layer */
 .layer, .card img {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0px;
   left: 0px;
+}
+
+.card img {
+  z-index: 0;
+  filter: grayscale(1);
 }
 
 .layer {
@@ -99,11 +94,6 @@ header .container-fluid {
   background-color: black;
 }
 
-.card img {
-  z-index: 0;
-  filter: grayscale(1);
-}
-
 .card:hover img {
   filter: grayscale(0);
 }
@@ -112,19 +102,10 @@ header .container-fluid {
   height: 0;
 }
 
+/* Make sure the body with the button is over the img and layer */
 .card-body {
   z-index: 2;
 }
-
-.card:hover {
-  box-shadow: 2px 5px 10px black;
-}
-
-/**
-
-~~~~~~~End main content~~~~~~~~
-
-**/
 
 
 /**
@@ -134,9 +115,9 @@ header .container-fluid {
 **/
 
 footer i:hover {
-  font-size: 2.3em;
   color: #d9534f
 }
+
 
 /*
 
@@ -144,43 +125,16 @@ footer i:hover {
 
 */
 
-@media (min-width: 544px) {
- article h4 {
-   height: 53px;
- }
-}
-
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
- .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .active .nav-link:hover {
-   font-size: 1.1em;
-   background-color: white;
-   border-radius: 2px;
-   color: #373a3c;
-   padding: .4em;
- }
-
- article h4 {
-   height: auto;
- }
-
- #intro-prints, #intro-sites  {
-  height: 100px;
-}
-
-}
-
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  
-  .card-block p {
-    height: 140px;
+  /* Tab effect when hover on nav links */
+  .navbar-dark .navbar-nav .nav-link:hover {
+     background-color: white;
+     border-radius: 2px;
+     color: #373a3c;
+     padding: .4em;
+     font-weight: bold;
   }
-
-  #intro-prints, #intro-sites  {
-   height: 70px;
- }
 
 }
