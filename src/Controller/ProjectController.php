@@ -13,8 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
+ * @IsGranted("ROLE_ADMIN")
  * @Route("/project")
  */
 class ProjectController extends AbstractController
