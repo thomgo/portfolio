@@ -107,6 +107,10 @@ h1 {
   z-index: 2;
 }
 
+#bio-image {
+  width: 40%;
+}
+
 .skills-list {
   list-style-type: none;
   padding: 0;
@@ -153,6 +157,10 @@ footer i:hover {
      color: #373a3c;
      padding: .4em;
      font-weight: bold;
+  }
+
+  #bio-image {
+    width: auto;
   }
 
 }
