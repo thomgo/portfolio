@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use App\Form\ContactType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProjectRepository;
@@ -25,19 +29,22 @@ class FrontController extends AbstractController
     public function about()
     {
         $title = "coucou les loulous";
-        return $this->render('front/about.html.twig', [
-
-        ]);
+        return $this->render('front/about.html.twig', []);
     }
 
     /**
      * @Route("/contact", name="contact")
      */
-    public function contact()
+    public function contact(Request $request)
     {
-        $title = "coucou les loulous";
-        return $this->render('front/contact.html.twig', [
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+        }
+        return $this->render('front/contact.html.twig', [
+          "form" => $form->createView()
         ]);
     }
 }
