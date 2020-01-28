@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Repository\ProjectRepository;
 
 class FrontController extends AbstractController
@@ -35,13 +36,23 @@ class FrontController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function contact(Request $request)
+    public function contact(Request $request, ValidatorInterface $validator)
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+          $errors = $validator->validate($contact);
+          if(count($errors) > 0){
+            $this->addFlash(
+              'errors',
+              $errors
+            );
+          }
+          else {
+
+          }
         }
         return $this->render('front/contact.html.twig', [
           "form" => $form->createView()

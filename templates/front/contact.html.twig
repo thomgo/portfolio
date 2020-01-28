@@ -5,6 +5,9 @@
 {% block body %}
   <div class="container w-50 m-auto">
     <h3 class="text-center my-2">Me contacter</h3>
+    {% for error in app.flashes('errors') %}
+          {{ error.message }}
+    {% endfor %}
     {{form(form)}}
   </div>
 {% endblock %}

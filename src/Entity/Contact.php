@@ -45,7 +45,7 @@ class Contact
    *
    * @return string
    */
-  public function getName()
+  public function getName(): ?string
   {
       return $this->name;
   }
@@ -57,7 +57,7 @@ class Contact
    *
    * @return self
    */
-  public function setName($name)
+  public function setName(string $name): Contact
   {
       $this->name = $name;
 
@@ -69,7 +69,7 @@ class Contact
    *
    * @return string
    */
-  public function getEmail()
+  public function getEmail(): ?string
   {
       return $this->email;
   }
@@ -81,7 +81,7 @@ class Contact
    *
    * @return self
    */
-  public function setEmail($email)
+  public function setEmail(string $email): Contact
   {
       $this->email = $email;
 
@@ -93,7 +93,7 @@ class Contact
    *
    * @return string
    */
-  public function getMessage()
+  public function getMessage(): ?string
   {
       return $this->message;
   }
@@ -105,7 +105,7 @@ class Contact
    *
    * @return self
    */
-  public function setMessage($message)
+  public function setMessage(string $message): Contact
   {
       $this->message = $message;
 
