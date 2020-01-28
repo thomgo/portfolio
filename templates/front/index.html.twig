@@ -27,7 +27,8 @@
                 </button>
               </header>
               <div class="modal-body">
-                {{project.description}}
+                <img class="float-left w-50 mr-3" src="{{asset("img/project_images/" ~ project.imageFilename)}}" alt="{{project.title}} image">
+                {{project.description|nl2br}}
               </div>
               <footer class="modal-footer">
                 {% if project.viewLink %}
