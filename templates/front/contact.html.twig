@@ -3,7 +3,7 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-  <div class="container w-50 m-auto">
+  <div class="container form-container m-auto">
     <h3 class="text-center my-2">Me contacter</h3>
     {% for label, messages in app.flashes(['success', 'danger']) %}
       {% for message in messages %}

@@ -34,7 +34,6 @@ h1 {
   border-bottom: solid 2px #d9534f;
 }
 
-
 /**
 
 ~~~~~~~Header~~~~~~~~
@@ -163,11 +162,19 @@ footer i:hover {
     width: auto;
   }
 
+  .form-container {
+    width: 75%;
+  }
+
 }
 
 /* large devices (992px and up) */
 @media (min-width: 992px) {
   .skills-list img {
     width: 60%;
+  }
+
+  .form-container {
+    width: 50%;
   }
 }
