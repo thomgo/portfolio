@@ -3,7 +3,7 @@
 {% block title %}Nouveau projet{% endblock %}
 
 {% block body %}
-    <div class="container w-50 m-auto">
+    <div class="container form-container m-auto">
       <h3 class="text-center my-2">Ajouter un projet au portfolio</h3>
       {{ include('project/_form.html.twig', {'button_label': 'Ajouter'}) }}
       <a class="btn btn-secondary my-4" href="{{ path('project_index') }}">Retour</a>
