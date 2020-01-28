@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use App\Repository\ProjectRepository;
 
 class FrontController extends AbstractController
@@ -36,7 +38,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function contact(Request $request, ValidatorInterface $validator)
+    public function contact(Request $request, ValidatorInterface $validator, MailerInterface $mailer)
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
@@ -51,7 +53,12 @@ class FrontController extends AbstractController
             );
           }
           else {
-
+            $email = (new Email())
+            ->from($contact->getEmail())
+            ->to('thomas.gossart.pro@gmail.com')
+            ->subject('Prise de contact de ')
+            ->text($contact->getMessage());
+            $sentEmail = $mailer->send($email);
           }
         }
         return $this->render('front/contact.html.twig', [
