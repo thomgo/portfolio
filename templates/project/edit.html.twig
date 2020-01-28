@@ -8,7 +8,4 @@
       {{ include('project/_form.html.twig', {'button_label': 'Modifier'}) }}
       <a class="btn btn-secondary my-4" href="{{ path('project_index') }}">Retour</a>
     </div>
-    {% if project.imageFilename %}
-      <img src="{{asset('img/project_images/' ~ project.imageFilename)}}" alt="">
-    {% endif %}
 {% endblock %}
