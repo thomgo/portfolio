@@ -19,6 +19,18 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
+
+    /**
+     *@return Array Returns array of projects
+     */
+    public function getProjectsSuperiorTo(int $position) {
+      return $this->createQueryBuilder('p')
+      ->where('p.position > :position')
+      ->setParameter('position', $position)
+      ->getQuery()
+      ->execute();
+    }
+
     /**
      *@return Integer Returns the total number of projects
      */

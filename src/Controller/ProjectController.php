@@ -105,12 +105,22 @@ class ProjectController extends AbstractController
     /**
      * @Route("/{id}", name="project_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Project $project, Filesystem $filesystem): Response
+    public function delete(Request $request, Project $project, Filesystem $filesystem, ProjectRepository $projectRepo): Response
     {
         if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
             $filesystem->remove($this->getParameter('projects_images_directory') . $project->getImageFilename());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($project);
+            $entityManager->flush();
+
+            // Reorder the position of all projects after the deleted one
+            $projects = $projectRepo->getProjectsSuperiorTo($project->getPosition());
+            if($projects) {
+              foreach ($projects as $key => $project) {
+                $newPosition = $project->getPosition() - 1;
+                $project->setPosition($newPosition);
+              }
+            }
             $entityManager->flush();
         }
 
