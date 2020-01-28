@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     projects_images_directory: "%kernel.project_dir%/public/img/project_images/"
+    contact_email: 'thomas.gossart.pro@gmail.com'
 
 services:
     # default configuration for services in *this* file
