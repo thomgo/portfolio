@@ -33,8 +33,13 @@ class Contact
    * @var string
    * @Assert\NotBlank
    * @Assert\Length(
-   *      min = 20,
+   *      min = 50,
    *      minMessage = "Votre message doit contenir au moins {{ limit }} lettres",
+   * )
+   * @Assert\Regex(
+   *     pattern="/\bsexe|\bsex|\bhot girl(s)?|\bfuck|\bdick|\blonely girl(s)?|\bfille(s)? célibatire(s)?|\bmerde|\bbite|\bconnard|\bpute|\bcaca|\beasy cash|\bargent facil(ement)?|\bargent rapid(ement)?|\bdevenir riche|\bmillionaire|\beasy money/i",
+   *     match=false,
+   *     message="Le contenu de votre message semble étrange"
    * )
   */
   private $message;
