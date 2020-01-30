@@ -129,6 +129,11 @@ h1 {
   width: 80%;
 }
 
+.form-container form button {
+  display: block;
+  margin: auto;
+}
+
 /**
 
 ~~~~~~~Footer~~~~~~~~
@@ -165,7 +170,6 @@ footer i:hover {
   .form-container {
     width: 75%;
   }
-
 }
 
 /* large devices (992px and up) */
