@@ -31,7 +31,6 @@ class FrontController extends AbstractController
      */
     public function about()
     {
-        $title = "coucou les loulous";
         return $this->render('front/about.html.twig', []);
     }
 
