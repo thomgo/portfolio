@@ -1,4 +1,4 @@
-<form method="post" class="d-inline" action="{{ path('project_position', {'id': project.id}) }}">
+<form method="post" class="" action="{{ path('project_position', {'id': project.id}) }}">
     <input type="hidden" name="direction" value="up">
     <input type="hidden" name="_token" value="{{ csrf_token('position' ~ project.id) }}">
     <button class="btn"><i class="fas fa-arrow-alt-circle-up"></i></button>

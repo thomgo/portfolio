@@ -5,7 +5,7 @@
 {% block body %}
     <h3 class="text-center my-2">Gérer les projets</h3>
     <a class="btn btn-secondary float-right mb-4" href="{{ path('project_new') }}">Nouveau projet</a>
-    <table class="table table-bordered table-striped">
+    <table class="table table-striped">
         <thead class="text-center thead-dark">
             <tr>
                 <th>Position</th>
@@ -18,7 +18,7 @@
         <tbody>
         {% for project in projects %}
             <tr>
-                <td>
+                <td class="d-flex flex-row justify-content-between align-items-center">
                   {{ project.position }}
                   {{ include('project/_position_up_form.html.twig', {project: project}, with_context = false) }}
                   {{ include('project/_position_down_form.html.twig', {project: project}, with_context = false) }}
