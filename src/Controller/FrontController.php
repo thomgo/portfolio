@@ -53,23 +53,23 @@ class FrontController extends AbstractController
             );
           }
           else {
-            // $email = (new Email())
-            // ->from($contact->getEmail())
-            // ->to($this->getParameter('contact_email'))
-            // ->subject('Prise de contact de ' . $contact->getName())
-            // ->text($contact->getMessage());
-            // try {
-            //   $sentEmail = $mailer->send($email);
-            //   $this->addFlash(
-            //     'success',
-            //     'Votre message a bien été envoyé. Je reviendrai vers vous le plus rapidement possible.'
-            //   );
-            // } catch (\Exception $e) {
-            //   $this->addFlash(
-            //     'danger',
-            //     "Un problème est survenu, votre message n'a pas pu être envoyé. Merci de réessayer."
-            //   );
-            // }
+            $email = (new Email())
+            ->from($contact->getEmail())
+            ->to($this->getParameter('contact_email'))
+            ->subject('Prise de contact de ' . $contact->getName())
+            ->text($contact->getMessage());
+            try {
+              $sentEmail = $mailer->send($email);
+              $this->addFlash(
+                'success',
+                'Votre message a bien été envoyé. Je reviendrai vers vous le plus rapidement possible.'
+              );
+            } catch (\Exception $e) {
+              $this->addFlash(
+                'danger',
+                "Un problème est survenu, votre message n'a pas pu être envoyé. Merci de réessayer."
+              );
+            }
           }
         }
         return $this->render('front/contact.html.twig', [
