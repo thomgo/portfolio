@@ -3,6 +3,7 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Filesystem\Filesystem;
 use App\Repository\ProjectRepository;
 use App\Entity\Project;
 
@@ -71,5 +72,28 @@ class FrontControllerTest extends WebTestCase
       ["Coach sportif"],
       ["Cercle suédois"]
     ];
+  }
+
+  public function testAboutHtmlStructure() {
+    $client = self::createClient();
+    $crawler = $client->request('GET', '/apropos');
+    $this->assertCount(3, $crawler->filter('h4'));
+    $this->assertCount(1, $crawler->filter('img#bio-image'));
+    $this->assertCount(2, $crawler->filter('ul.skills-list'));
+  }
+
+  public function testAboutImages() {
+    $client = self::createClient();
+    $filesystem = new Filesystem();
+    $crawler = $client->request('GET', '/apropos');
+
+    $bioImageSrc = $crawler->filter('img#bio-image')->attr('src');
+    $this->assertTrue($filesystem->exists("public/" . $bioImageSrc));
+
+    $listImages = $crawler->filter('ul.skills-list li a img');
+    foreach ($listImages as $key => $image) {
+      $src = $image->getAttribute('src');
+      $this->assertTrue($filesystem->exists("public/" . $src));
+    }
   }
 }
