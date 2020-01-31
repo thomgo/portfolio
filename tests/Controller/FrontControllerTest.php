@@ -96,4 +96,14 @@ class FrontControllerTest extends WebTestCase
       $this->assertTrue($filesystem->exists("public/" . $src));
     }
   }
+
+  public function testContactHtmlStructure() {
+    $client = self::createClient();
+    $crawler = $client->request('GET', '/contact');
+    $this->assertCount(1, $crawler->filter('form'));
+    $this->assertCount(1, $crawler->filter('form input[type=text]'));
+    $this->assertCount(1, $crawler->filter('form input[type=email]'));
+    $this->assertCount(1, $crawler->filter('form textarea'));
+    $this->assertCount(1, $crawler->filter('form button[type=submit]'));
+  }
 }
