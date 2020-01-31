@@ -3,6 +3,8 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Repository\ProjectRepository;
+use App\Entity\Project;
 
 class FrontControllerTest extends WebTestCase
 {
@@ -36,6 +38,38 @@ class FrontControllerTest extends WebTestCase
         ['/'],
         ['/apropos'],
         ['/contact'],
+    ];
+  }
+
+  public function testIndexDisplaysProjects() {
+    $projects = $this->provideProjects();
+    $client = self::createClient();
+    $crawler = $client->request('GET', '/');
+
+    $this->assertCount(count($projects), $crawler->filter('article.card'));
+    $this->assertCount(count($projects), $crawler->filter('article.card button'));
+    $this->assertCount(count($projects), $crawler->filter('section.modal'));
+  }
+
+  /**
+  * @dataProvider provideProjects
+  */
+  public function testIndexDisplaysTitles($project) {
+    $client = self::createClient();
+    $crawler = $client->request('GET', '/');
+    $this->assertSelectorTextContains("article.card button:contains($project)", $project);
+  }
+
+  public function provideProjects() {
+    return [
+      ["Ex Libris"],
+      ["ADEP anglais"],
+      ["Carnet de notes"],
+      ["SocNet98"],
+      ["Fiches méthodologiques"],
+      ["Jeu des paires"],
+      ["Coach sportif"],
+      ["Cercle suédois"]
     ];
   }
 }
