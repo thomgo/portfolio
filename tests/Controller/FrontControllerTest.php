@@ -55,7 +55,7 @@ class FrontControllerTest extends WebTestCase
   /**
   * @dataProvider provideProjects
   */
-  public function testIndexDisplaysTitles($project) {
+  public function testIndexHtmlStructure($project) {
     $client = self::createClient();
     $crawler = $client->request('GET', '/');
     $this->assertSelectorTextContains("article.card button:contains($project)", $project);
