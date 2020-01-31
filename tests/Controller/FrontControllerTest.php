@@ -106,4 +106,78 @@ class FrontControllerTest extends WebTestCase
     $this->assertCount(1, $crawler->filter('form textarea'));
     $this->assertCount(1, $crawler->filter('form button[type=submit]'));
   }
+
+  /**
+  * @dataProvider provideContacts
+  */
+  public function testContactFormValidation($name, $email, $message, $errors, $success) {
+    $client = static::createClient();
+    $crawler = $client->request('GET', '/contact');
+
+    $form = $crawler->selectButton('Envoyer')->form([
+      "contact[name]" => $name,
+      "contact[email]" => $email,
+      "contact[message]" => $message
+    ]);
+
+    $crawler = $client->submit($form);
+    $this->assertTrue($client->getResponse()->isSuccessful());
+    $this->assertEquals($errors, $crawler->filter('span.form-error-message')->count());
+    $this->assertEquals($success, $crawler->filter('div.alert-success')->count());
+  }
+
+  public function provideContacts() {
+    return [
+      [
+        't',
+        't',
+        'b',
+        3,
+        0
+      ],
+      [
+        't',
+        'test@gmail.com',
+        'b',
+        2,
+        0
+      ],
+      [
+        'Joe',
+        'testgmail.com',
+        'test',
+        2,
+        0
+      ],
+      [
+        'Joe',
+        'test@gmail.com',
+        'argent facile',
+        2,
+        0
+      ],
+      [
+        'Joe',
+        'test@gmail.com',
+        'Bonjour, nous avons une offre à vous faire qui pourrait intéresser, voulez-vous rencontrer des filles célibataire ?',
+        1,
+        0
+      ],
+      [
+        'Joe',
+        'jhondoe@yahoo.com',
+        'Bonjour, nous avons une offre à vous faire qui pourrait intéresser, voulez-vous en discuter ?',
+        0,
+        1
+      ],
+      [
+        'JackJack',
+        'jackruban@devcompagny.com',
+        'Hi we have got an easy job for you that could help you making a lot of money',
+        0,
+        1
+      ],
+    ];
+  }
+
 }
