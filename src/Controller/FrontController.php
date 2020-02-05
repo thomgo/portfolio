@@ -35,6 +35,14 @@ class FrontController extends AbstractController
     }
 
     /**
+     * @Route("/credits", name="credits")
+     */
+    public function credits()
+    {
+        return $this->render('front/credits.html.twig', []);
+    }
+
+    /**
      * @Route("/contact", name="contact")
      */
     public function contact(Request $request, ValidatorInterface $validator, MailerInterface $mailer)

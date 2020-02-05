@@ -39,6 +39,7 @@ class FrontControllerTest extends WebTestCase
         ['/'],
         ['/apropos'],
         ['/contact'],
+        ['/credits'],
     ];
   }
 
