@@ -22,7 +22,7 @@ p a, nav i {
   font-style: italic;
 }
 
-h1, h3, footer p {
+h1, h3, footer p, footer p a {
   font-family: 'Indie Flower', cursive;
 }
 
