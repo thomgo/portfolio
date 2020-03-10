@@ -17,6 +17,11 @@ class Contact
    *      minMessage = "Votre nom doit contenir au moins {{ limit }} lettres",
    *      maxMessage = "Votre nom ne doit pas contenir plus de {{ limit }} lettres"
    * )
+   * @Assert\Regex(
+   *     pattern="/\bsexe|\bsex|\bhot girl(s)?|\bfuck|\bdick|\blonely girl(s)?|\bfille(s)? célibataire(s)?|\bmerde|\bbite|\bconnard|\bpute|\bcaca|\beasy cash|\bargent facil(ement)?|\bargent rapid(ement)?|\bdevenir riche|\bmillionaire|\beasy money|\bbitcoin(s)?|\bcryptocurrency|\bcasino(s)?|\bdating site/i",
+   *     match=false,
+   *     message="Le contenu de votre message semble étrange"
+   * )
   */
   private $name;
 
@@ -25,6 +30,11 @@ class Contact
    * @Assert\NotBlank
    * @Assert\Email(
    *     message = "Votre email '{{ value }}' n'est pas valide"
+   * )
+   * @Assert\Regex(
+   *     pattern="/\bsexe|\bsex|\bhot girl(s)?|\bfuck|\bdick|\blonely girl(s)?|\bfille(s)? célibataire(s)?|\bmerde|\bbite|\bconnard|\bpute|\bcaca|\beasy cash|\bargent facil(ement)?|\bargent rapid(ement)?|\bdevenir riche|\bmillionaire|\beasy money|\bbitcoin(s)?|\bcryptocurrency|\bcasino(s)?|\bdating site/i",
+   *     match=false,
+   *     message="Le contenu de votre message semble étrange"
    * )
   */
   private $email;
@@ -37,7 +47,7 @@ class Contact
    *      minMessage = "Votre message doit contenir au moins {{ limit }} lettres",
    * )
    * @Assert\Regex(
-   *     pattern="/\bsexe|\bsex|\bhot girl(s)?|\bfuck|\bdick|\blonely girl(s)?|\bfille(s)? célibataire(s)?|\bmerde|\bbite|\bconnard|\bpute|\bcaca|\beasy cash|\bargent facil(ement)?|\bargent rapid(ement)?|\bdevenir riche|\bmillionaire|\beasy money/i",
+   *     pattern="/\bsexe|\bsex|\bhot girl(s)?|\bfuck|\bdick|\blonely girl(s)?|\bfille(s)? célibataire(s)?|\bmerde|\bbite|\bconnard|\bpute|\bcaca|\beasy cash|\bargent facil(ement)?|\bargent rapid(ement)?|\bdevenir riche|\bmillionaire|\beasy money|\bbitcoin(s)?|\bcryptocurrency|\bcasino(s)?|\bdating site/i",
    *     match=false,
    *     message="Le contenu de votre message semble étrange"
    * )
